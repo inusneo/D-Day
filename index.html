@@ -8,7 +8,34 @@
 </head>
 <body>
   <main>
-    <h1></h1>
+    <h1>D-day Counter</h1>
+    <div class="container">
+      <div class="box_day">
+        <span id="days">0</span>
+        <span>일</span>
+      </div>
+      <div class="box_day">
+        <span id="hours">0</span>
+        <span>시간</span>
+      </div>
+      <div class="box_day">
+        <span id="min">0</span>
+        <span>분</span>
+      </div>
+      <div class="box_day">
+        <span id="sec">0</span>
+        <span>초</span>
+      </div>
+    </div>
+    <div id="boxInput">
+      <input type="number" size="5" maxlength="4" id="inputYear" class="input_year" title="카운트 할 연도 입력" required /> -
+      <input type="number" size="5" maxlength="2" id="inputMonth" class="input_month" title="카운트 할 월 입력" required /> -
+      <input type="number" size="5" maxlength="2" id="inputDate" class="input_Date" title="카운트 할 일 입력" required />
+    </div>
+    <div class="box_btn">
+      <button type="button" id="btnCount" class="btn">카운트 시작</button>
+      <button type="button" id="btnReset" class="btn">카운트 초기화</button>
+    </div>
   </main>
 </body>
 </html>
