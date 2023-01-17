@@ -68,7 +68,7 @@ input {
   font-size: 1rem;
   cursor: pointer;
 }
-.btn_start {
+.btn_count {
   background-color: rgb(242, 255, 0);
 }
 .btn_reset {
