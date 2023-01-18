@@ -46,10 +46,15 @@ input,textarea{width:100%;height:100%;-webkit-appearance:none;border:0;border-ra
 .box_day:last-child {
   margin-right: 0;
 }
+.txt_day {
+  opacity: .7;
+  margin-top: 10px;
+  font-size: 1rem;
+}
 .box_input {
   display: flex;
   justify-content: center;
-  margin: 40px 0 10px;
+  margin: 20px 0 10px;
   line-height: 30px;
 }
 input {
