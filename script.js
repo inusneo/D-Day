@@ -16,10 +16,9 @@ const dateMaker = () => {
   return dateForm;
 }
 
-const counterMaker = () => {
-  const targetDateInput = dateMaker();
+const counterMaker = ( data ) => {
   const nowDate = new Date();
-  const targetDate = new Date(targetDateInput).setHours(0, 0, 0, 0);
+  const targetDate = new Date(data).setHours(0, 0, 0, 0);
   const remaining = (targetDate - nowDate) / 1000;
 
   if (remaining <= 0) {
@@ -71,25 +70,31 @@ const counterMaker = () => {
   // docObj['days'].textContent = remainingObj['remainingDate'];
 }
 
+const startInterval = () => {
+  const targetDateInput = dateMaker();
+
+  setClearInterval();
+  dayContainer.style.display = 'flex';
+  dayTxt.style.display = 'none';
+  counterMaker(targetDateInput);
+  // 인자를 전달하고 싶을 때는 함수 내부에 넣어 줘야 함
+  const intervalId = setInterval(() => counterMaker(targetDateInput), 1000);
+  intervalArr.push(intervalId);
+}
 const setClearInterval = () => {
   dayContainer.style.display = 'none';
   dayTxt.style.display = 'flex';
   dayTxt.textContent = 'D-day를 입력해 주세요.';
-
+  // setInterval은 실핼 할 때마다 각 id(1,2,3...)에 해당하는 함수를 실행하기 때문에 모든 인터벌을 취소해 주어야 함.
   for (let i = 0; i <= intervalArr.length; i++) {
     clearInterval(intervalArr[i]);
   }
 }
 
 btnCount.addEventListener('click', () => {
-  dayContainer.style.display = 'flex';
-  dayTxt.style.display = 'none';
-  counterMaker();
-  const intervalId = setInterval(counterMaker, 1000);
-  intervalArr.push(intervalId);
+  startInterval();
 });
 
-// setInterval은 실핼 할 때마다 각 id(1,2,3...)에 해당하는 함수를 실행하기 때문에 모든 인터벌을 취소해 주어야 함.
 btnReset.addEventListener('click', () => {
   setClearInterval();
 });
