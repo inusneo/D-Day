@@ -2,6 +2,8 @@ const btnCount = document.querySelector('#btnCount');
 const btnReset = document.querySelector('#btnReset');
 const dayContainer = document.querySelector('.container');
 const dayTxt = document.querySelector('#dayTxt');
+const intervalArr = [];
+
 dayContainer.style.display = 'none';
 
 const dateMaker = () => {
@@ -22,6 +24,7 @@ const counterMaker = () => {
 
   if (remaining <= 0) {
     // 입력 날짜가 현재 시간과 같거나 과거일 경우
+    setClearInterval();
     dayContainer.style.display = 'none';
     dayTxt.style.display = 'flex';
     dayTxt.textContent = '타이머가 종료 되었습니다.';
@@ -30,6 +33,7 @@ const counterMaker = () => {
   } else if (isNaN(remaining)) {
     // 잘못된 날짜가 입력된 경우
     // alert('유효한 시간대가 아닙니다.');
+    setClearInterval();
     dayContainer.style.display = 'none';
     dayTxt.style.display = 'flex';
     dayTxt.textContent = '유효한 시간대가 아닙니다.';
@@ -67,8 +71,25 @@ const counterMaker = () => {
   // docObj['days'].textContent = remainingObj['remainingDate'];
 }
 
+const setClearInterval = () => {
+  dayContainer.style.display = 'none';
+  dayTxt.style.display = 'flex';
+  dayTxt.textContent = 'D-day를 입력해 주세요.';
+
+  for (let i = 0; i <= intervalArr.length; i++) {
+    clearInterval(intervalArr[i]);
+  }
+}
+
 btnCount.addEventListener('click', () => {
   dayContainer.style.display = 'flex';
   dayTxt.style.display = 'none';
   counterMaker();
+  const intervalId = setInterval(counterMaker, 1000);
+  intervalArr.push(intervalId);
+});
+
+// setInterval은 실핼 할 때마다 각 id(1,2,3...)에 해당하는 함수를 실행하기 때문에 모든 인터벌을 취소해 주어야 함.
+btnReset.addEventListener('click', () => {
+  setClearInterval();
 });
