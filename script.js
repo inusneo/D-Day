@@ -49,10 +49,19 @@ const counterMaker = ( data ) => {
   
   const docArr = ['days', 'hours', 'min', 'sec']
   const timeKeys = Object.keys(remainingObj);
+
+  const format = (time) => {
+    if (time < 10) {
+      return '0' + time;
+    } else {
+      return time;
+    }
+  }
   
   let i = 0;
   for (tag of docArr) {
-    document.getElementById(tag).textContent = remainingObj[timeKeys[i]];
+    const remainingTime = format(remainingObj[timeKeys[i]]);
+    document.getElementById(tag).textContent = remainingTime;
     i++;
   }
   // const docObj = {
