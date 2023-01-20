@@ -2,6 +2,7 @@ const btnCount = document.querySelector('#btnCount');
 const btnReset = document.querySelector('#btnReset');
 const dayContainer = document.querySelector('.container');
 const dayTxt = document.querySelector('#dayTxt');
+const localDate = localStorage.getItem('saved-date');
 const intervalArr = [];
 
 dayContainer.style.display = 'none';
@@ -17,6 +18,10 @@ const dateMaker = () => {
 }
 
 const counterMaker = ( data ) => {
+  if (data !== localDate) {
+    localStorage.setItem('saved-date', data);
+  }
+
   const nowDate = new Date();
   const targetDate = new Date(data).setHours(0, 0, 0, 0);
   const remaining = (targetDate - nowDate) / 1000;
@@ -79,9 +84,10 @@ const counterMaker = ( data ) => {
   // docObj['days'].textContent = remainingObj['remainingDate'];
 }
 
-const startInterval = () => {
-  const targetDateInput = dateMaker();
-
+const startInterval = (targetDateInput) => {
+  if (!targetDateInput) {
+  targetDateInput = dateMaker();
+  }
   setClearInterval();
   dayContainer.style.display = 'flex';
   dayTxt.style.display = 'none';
@@ -91,6 +97,7 @@ const startInterval = () => {
   intervalArr.push(intervalId);
 }
 const setClearInterval = () => {
+  localStorage.removeItem('saved-date');
   dayContainer.style.display = 'none';
   dayTxt.style.display = 'flex';
   dayTxt.textContent = 'D-day를 입력해 주세요.';
@@ -107,3 +114,11 @@ btnCount.addEventListener('click', () => {
 btnReset.addEventListener('click', () => {
   setClearInterval();
 });
+
+if (localDate) {
+  startInterval(localDate);
+} else {
+  dayContainer.style.display = 'none';
+  dayTxt.style.display = 'flex';
+  dayTxt.textContent = 'D-day를 입력해 주세요.';
+}
