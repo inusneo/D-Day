@@ -101,7 +101,8 @@ const setClearInterval = () => {
   dayContainer.style.display = 'none';
   dayTxt.style.display = 'flex';
   dayTxt.textContent = 'D-day를 입력해 주세요.';
-  // setInterval은 실핼 할 때마다 각 id(1,2,3...)에 해당하는 함수를 실행하기 때문에 모든 인터벌을 취소해 주어야 함.
+  // setInterval은 실핼 할 때마다 각 id(1,2,3...)에 해당하는 함수를 실행하기 때문에 
+  // 모든 인터벌을 취소해 주어야 함.
   for (let i = 0; i <= intervalArr.length; i++) {
     clearInterval(intervalArr[i]);
   }
